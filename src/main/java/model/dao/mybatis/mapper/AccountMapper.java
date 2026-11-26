@@ -13,7 +13,7 @@ public interface AccountMapper {
 	
 	public AccountDTO selectMemberById(String userId);
 	
-	public AccountDTO selectMemberByName(String userName);
+	public List<AccountDTO> selectMemberByName(String userName);
 	
 	public AccountDTO selectAccountById(String userId);
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,8 @@
 	<title>로그인</title>
 	<script>
 		function login() {
+			const form = document.loginForm;
+			
 			if (form.userId.value == "") {
 				alert("아이디를 입력하세요.");
 				form.userId.focus();
@@ -24,7 +27,7 @@
 <body>
 	<div>로그인</div>
 	<!-- login form -->
-	<form name="loginForm" method="POST" action="#">
+	<form name="loginForm" method="POST" action="<c:url value='/user/login' />">
 		<div>
 			
 		</div>
@@ -39,7 +42,7 @@
 			</tr>
 		</table>
 		<div>
-			<button type="button" onClick="#">로그인</button>
+			<button type="button" onClick="login()">로그인</button>
 		</div>
 	</form>
 	<div>

@@ -1,73 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mapper namespace="model.dao.mybatis.mapper">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.AccountMapper">
 	<!-- 모든 회원 리스트 조회 -->
 	<select id="selectAllMember" resultType="AccountDTO">
-		SELECT userid, name, email, phone, role, height
-        FROM account2
-        WHERE role IN ('MEMBER', 'PTMEMBER')
+		SELECT "userId", "name", "email", "phone", "role", "height"
+        FROM "Account"
+        WHERE "role" IN ('MEMBER', 'PTMEMBER')
 	</select>
 	
 	<!-- 일반 회원 리스트 조회 -->
 	<select id="selectMember" resultType="AccountDTO">
-		SELECT userid, name, email, phone, role, height
-       	FROM account2
-        WHERE role = 'MEMBER'
+		SELECT "userId", "name", "email", "phone", "role", "height"
+		FROM "Account"
+        WHERE "role" = 'MEMBER'
 	</select>
 	
 	<!-- PT 회원 리스트 조회 -->
 	<select id="selectPtMember" resultType="AccountDTO">
-		SELECT userid, name, email, phone, role, height
-        FROM account2
-       	WHERE role = 'PTMEMBER'
+		SELECT "userId", "name", "email", "phone", "role", "height"
+		FROM "Account"
+		WHERE "role" = 'PTMEMBER';
 	</select>
 	
 	<!-- ID로 회원 조회 -->
 	<select id="selectMemberById" parameterType="string" resultType="AccountDTO">
-		SELECT userid, name, email, phone, role, height
-        FROM account2
-        WHERE userid = #{userId} AND role = 'MEMBER'
+		SELECT "userId", "name", "email", "phone", "role", "height"
+		FROM "Account"
+        WHERE "userId" = #{userId} AND "role" = 'MEMBER'
 	</select>
 	
 	<!-- 이름으로 회원 조회 -->
 	<select id="selectMemberByName" parameterType="string" resultType="AccountDTO">
-		SELECT userid, name, email, phone, role, height
-        FROM account2
-        WHERE name = #{userName} AND role = 'MEMBER'
+		SELECT "userId", "name", "email", "phone", "role", "height"
+		FROM "Account"
+        WHERE "name" = #{name} AND "role" = 'MEMBER'
 	</select>
 	
-	<!-- ID로 사용자 조회 -->
+	<!-- ID로 사용자 조회(로그인) -->
 	<select id="selectAccountById" parameterType="string" resultType="AccountDTO">
-		SELECT userid, name, email, phone, role, height 
-		FROM account2 
-		WHERE userid = #{userId}
+		SELECT "userId", "password", "name", "email", "phone", "role", "height"
+		FROM "Account"
+		WHERE "userId" = #{userId}
 	</select>
 	
 	<!-- ID 중복 확인 -->
 	<select id="selectUserId" parameterType="string" resultType="int">
-		SELECT COUNT(*) 
-		FROM account2 
-		WHERE userid = #{userId}
+		SELECT COUNT(*) AS count
+		FROM "Account" 
+		WHERE "userId" = #{userId}
 	</select>
 	
 	<!-- 사용자 추가 -->
-	<insert id="insertAccount" parameterType="AccountDTO" resultType="int">
-		INSERT INTO account2 (userid, password, name, email, phone, role, height)
-        VALUES (#{userId}, #{password}, #{userName}, #{email}, #{phone}, #{role}, #{height})
+	<insert id="insertAccount" parameterType="AccountDTO">
+		INSERT INTO "Account" ("userId", "password", "name", "email", "phone", "role", "height")
+        VALUES (#{userId}, #{password}, #{name}, #{email}, #{phone}, #{role}, #{height})
 	</insert>
 	
 	<!-- 사용자 삭제 -->
-	<delete id="deleteAccount" parameterType="string" resultType="int">
-		DELECT FROM account2 WHERE userid = #{userId}
+	<delete id="deleteAccount" parameterType="string">
+		DELETE FROM "Account" WHERE "userId" = #{userId}
 	</delete>
 	
 	<!-- 사용자 정보 수정 -->
-	<update id="updateAccount" parameterType="AccountDTO" resultType="int">
-		UPDATE account SET
-        password = #{password},
-        name = #{userName},
-        email = #{email},
-        phone = #{phone}, 
-        height = #{height}
-        WHERE userid = #{userId}
+	<update id="updateAccount" parameterType="AccountDTO">
+		UPDATE "Account" SET 
+		"password"= #{password},
+        "name" = #{name},
+        "email" = #{email},
+        "phone" = #{phone}, 
+        "height" = #{height}
+        WHERE "userId" = #{userId}
 	</update>
 </mapper>

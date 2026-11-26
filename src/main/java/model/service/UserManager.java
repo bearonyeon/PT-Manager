@@ -1,6 +1,7 @@
 package model.service;
 
 import model.dao.mybatis.AccountRepository;
+import model.dto.AccountDTO;
 
 /*
  * 사용자 계정 관리 API를 사용하는 개발자들이 직접 접근하는 클래스
@@ -24,5 +25,32 @@ public class UserManager {
 		return userManager;
 	}
 	
+	public int insertAccount(AccountDTO account) {
+		if (accRepo.existingAccount(account.getUserId()) == true) {
+			// throw new ExistingAccountException(account.getUserId() + "는 존재하는 아이디입니다.");
+		}
+		return accRepo.insertAccount(account);
+	}
 	
+	public int updateAccount(AccountDTO account) {
+		return 1;
+	}
+	
+	public AccountDTO findAccount(String userId) {
+		AccountDTO account = accRepo.getAccountById(userId);
+		
+		if (account == null) {
+			//throw new UserNotFoundException(userId + "는 존재하지 않는 아이디입니다.");
+		}
+		return account;
+	}
+	
+	public boolean login(String userId, String password) {
+		AccountDTO account = findAccount(userId);
+		
+		if (!account.matchPassword(password)) {
+			//throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
+		}
+		return true;
+	}
 }

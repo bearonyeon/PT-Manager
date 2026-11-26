@@ -90,4 +90,11 @@ public class AccountDTO {
         this.height = height;
     }
     
+    public boolean matchPassword(String password) {
+    	if (password == null) {
+    		return false;
+    	}
+    	return this.password.equals(password);
+    }
+    
 }

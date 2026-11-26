@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>dbp</groupId>
   <artifactId>PTManager</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
   <name>PT Manager System</name>
   <properties>
    		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,6 +16,7 @@
 		<logback-classic.version>1.2.6</logback-classic.version>
 		<commons-dbcp2.version>2.9.0</commons-dbcp2.version>
 		<oracle-jdbc-driver.version>21.3.0.0</oracle-jdbc-driver.version>
+		<mybatis.version>3.5.7</mybatis.version>
 	</properties>
   <dependencies>
 		<!-- Servlet, JSP, JSTL libraries -->
@@ -46,6 +49,13 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback-classic.version}</version>
 		</dependency>
+		
+		<!-- MyBatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
 
 		<!-- DBCP2 -->
 		<dependency>
@@ -62,4 +72,22 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>	
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.4.0</version>
+			</plugin>
+		</plugins>
+	</build>
 </project>

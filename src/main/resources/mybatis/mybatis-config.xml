@@ -7,8 +7,7 @@
     	<setting name="cacheEnabled" value="false"/>
   	</settings>
   	<typeAliases>
-		<typeAlias type="model.domain.Community" alias="Community" />
-		<typeAlias type="model.domain.User" alias="User" />
+		<typeAlias type="model.dto.AccountDTO" alias="AccountDTO" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -16,13 +15,13 @@
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.OracleDriver" />
 				<property name="url" value="jdbc:oracle:thin:@dblab.dongduk.ac.kr:1521/orclpdb" />
-				<property name="username" value="dbp" />
-				<property name="password" value="dbpdwu#" />
+				<property name="username" value="dbp260101" />
+				<property name="password" value="24913" />
 			</dataSource>
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="mybatis/mapper/CommunityMapper.xml" /> <!-- src/main/resources/... -->
+		<mapper resource="mybatis/mapper/AccountMapper.xml" /> <!-- src/main/resources/... -->
 	</mappers>
 </configuration>
 
