@@ -6,3 +6,6 @@ git remote add origin https://github.com/bearonyeon/PT-Manager.git
 git fetch origin
 ## 4. 해당 브랜치만 다운로드
 git clone -b feature/mvc-setup
+
+## 원하는 브랜치만 다운로드
+git clone -b feature/mvc-setup --single-branch https://github.com/bearonyeon/PT-Manager.git
