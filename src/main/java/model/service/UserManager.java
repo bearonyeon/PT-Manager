@@ -1,7 +1,12 @@
 package model.service;
 
+import java.sql.SQLException;
+
 import model.dao.mybatis.AccountRepository;
 import model.dto.AccountDTO;
+import model.service.exception.ExistingUserException;
+import model.service.exception.PasswordMismatchException;
+import model.service.exception.UserNotFoundException;
 
 /*
  * 사용자 계정 관리 API를 사용하는 개발자들이 직접 접근하는 클래스
@@ -25,9 +30,9 @@ public class UserManager {
 		return userManager;
 	}
 	
-	public int insertAccount(AccountDTO account) {
+	public int insertAccount(AccountDTO account) throws SQLException, ExistingUserException {
 		if (accRepo.existingAccount(account.getUserId()) == true) {
-			// throw new ExistingAccountException(account.getUserId() + "는 존재하는 아이디입니다.");
+			throw new ExistingUserException(account.getUserId() + "는 존재하는 아이디입니다.");
 		}
 		return accRepo.insertAccount(account);
 	}
@@ -36,20 +41,20 @@ public class UserManager {
 		return 1;
 	}
 	
-	public AccountDTO findAccount(String userId) {
+	public AccountDTO findAccount(String userId) throws SQLException, UserNotFoundException {
 		AccountDTO account = accRepo.getAccountById(userId);
 		
 		if (account == null) {
-			//throw new UserNotFoundException(userId + "는 존재하지 않는 아이디입니다.");
+			throw new UserNotFoundException(userId + "는 존재하지 않는 아이디입니다.");
 		}
 		return account;
 	}
 	
-	public boolean login(String userId, String password) {
+	public boolean login(String userId, String password) throws SQLException, UserNotFoundException, PasswordMismatchException {
 		AccountDTO account = findAccount(userId);
 		
 		if (!account.matchPassword(password)) {
-			//throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
+			throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
 		}
 		return true;
 	}

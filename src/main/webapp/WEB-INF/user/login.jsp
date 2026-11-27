@@ -46,7 +46,7 @@
 		</div>
 	</form>
 	<div>
-		회원가입
+		<a href="<c:url value='/user/register' />">회원가입</a>
 	</div>
 </body>
 </html>

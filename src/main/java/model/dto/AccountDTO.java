@@ -13,8 +13,7 @@ public class AccountDTO {
         super();
     }
 
-    public AccountDTO(String userId, String password, String name, String email, String phone, String role,
-            double height) {
+    public AccountDTO(String userId, String password, String name, String email, String phone, String role, double height) {
         super();
         this.userId = userId;
         this.password = password;
